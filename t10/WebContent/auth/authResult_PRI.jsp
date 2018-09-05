@@ -225,18 +225,18 @@
 </table>
 
 <script type="text/javascript">
-//var from = $('#addr').val();
-	var from = '0x5f3e46d770493bb6368fdf42c944807615b04f19';
-	console.log(from);
+ 	//var addr = $('#addr').val();
+	var addr = '0xf9acc6ebb64f842b1af3696c453213096b576c8f';
+	console.log(addr);
 	var web3 = new Web3("http://10.64.78.19:8545"); 
 	web3.setProvider(new web3.providers.HttpProvider("http://10.64.78.19:8545"));
 	
-	var contractAddr = "0x8ff4f1dde6b1bc8ad08a6ee1f6dfac22b7927f6b";
+	var contractAddr = "0x279f74d3a292ab9ac5ea45d5a6dfcd8953eb366d";
 	var abi = JSON.parse('[ { "constant": true, "inputs": [], "name": "getHouseAddr", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "name", "type": "string" }, { "name": "identity", "type": "string" }, { "name": "transferDate", "type": "string" }, { "name": "transferReason", "type": "string" }, { "name": "relation", "type": "string" } ], "name": "setFamily", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "name", "type": "string" }, { "name": "identity", "type": "string" }, { "name": "transferDate", "type": "string" }, { "name": "transferReason", "type": "string" }, { "name": "relation", "type": "string" }, { "name": "houseAddr", "type": "string" } ], "name": "setHouseholder", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getHouseholder", "outputs": [ { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "index", "type": "uint256" } ], "name": "getFamily", "outputs": [ { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getFamilyCount", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ]');
 	
 	var contract = web3.eth.contract(abi).at(contractAddr);
 	
-	var householderInfo = contract.getHouseholder.call();
+	var householderInfo = contract.getHouseholder.call({ from : addr });
 	
 	var householderName = householderInfo[0];
 	var identity = householderInfo[1];

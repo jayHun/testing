@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<input type="hidden" id="addr" name="addr" value="${ addr }"/>
+
 
 <table style="width: 751.65pt; border-collapse: collapse; border: none; margin-left: 4.85pt; margin-right: 4.85pt; height: 338px;" width="1002">
 <tbody>
@@ -108,27 +108,29 @@
 </tbody>
 </table>
 
+<input type="hidden" value="${ addr }" id ="addr"/>
 <script type="text/javascript">
- 	var addr = "'" + $('#addr').val() + "'";
-	//var addr = '0x5f3e46d770493bb6368fdf42c944807615b04f19';
+	var addr = $('#addr').val();
+	//var addr = '0xf9acc6ebb64f842b1af3696c453213096b576c8f';
 	console.log(addr);
-	var web3 = new Web3("http://10.64.78.19:8545"); 
-	web3.setProvider(new web3.providers.HttpProvider("http://10.64.78.19:8545"));
 	
-	var contractAddr = "0x5d12abac4b960fc26f2a04b1ea3531ba534caca1";
+	var web3 = new Web3(); 
+	web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
 	
-	var abi = JSON.parse('[ { "anonymous": false, "inputs": [ { "indexed": false, "name": "category", "type": "string" }, { "indexed": false, "name": "price", "type": "string" } ], "name": "invoiceInfo", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "recieverName", "type": "string" }, { "indexed": false, "name": "recieverAddr", "type": "string" }, { "indexed": false, "name": "recieverPhone", "type": "string" } ], "name": "receiverInfo", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "senderName", "type": "string" }, { "indexed": false, "name": "senderAddr", "type": "string" }, { "indexed": false, "name": "senderPhone", "type": "string" } ], "name": "senderInfo", "type": "event" }, { "constant": false, "inputs": [ { "name": "_senderName", "type": "string" }, { "name": "_senderAddr", "type": "string" }, { "name": "_senderPhone", "type": "string" }, { "name": "_recieverName", "type": "string" }, { "name": "_recieverAddr", "type": "string" }, { "name": "_recieverPhone", "type": "string" }, { "name": "_category", "type": "string" }, { "name": "_price", "type": "string" } ], "name": "setInvoice", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getCategory", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getPrice", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReceiverAddr", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReceiverName", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReceiverPhone", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getSenderAddr", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getSenderName", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getSenderPhone", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "InvoiceList", "outputs": [ { "components": [ { "name": "senderName", "type": "string" }, { "name": "senderAddr", "type": "string" }, { "name": "senderPhone", "type": "string" } ], "name": "sender", "type": "tuple" }, { "components": [ { "name": "receiverName", "type": "string" }, { "name": "receiverAddr", "type": "string" }, { "name": "receiverPhone", "type": "string" } ], "name": "receiver", "type": "tuple" }, { "name": "category", "type": "string" }, { "name": "price", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" } ]');
+	var contractAddr = "0x02b33668ff3e0f252e8f8e25eab91c7a6b640552";
+	
+	var abi = JSON.parse('[ { "constant": false, "inputs": [ { "name": "category", "type": "string" }, { "name": "price", "type": "string" } ], "name": "setInvoice", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "recieverName", "type": "string" }, { "name": "recieverAddr", "type": "string" }, { "name": "recieverPhone", "type": "string" } ], "name": "setReceiver", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "senderName", "type": "string" }, { "name": "senderAddr", "type": "string" }, { "name": "senderPhone", "type": "string" } ], "name": "setSender", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getCategory", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getPrice", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReceiverAddr", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReceiverName", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReceiverPhone", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getSenderAddr", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getSenderName", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getSenderPhone", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "InvoiceList", "outputs": [ { "components": [ { "name": "name", "type": "string" }, { "name": "addr", "type": "string" }, { "name": "phone", "type": "string" } ], "name": "sender", "type": "tuple" }, { "components": [ { "name": "name", "type": "string" }, { "name": "addr", "type": "string" }, { "name": "phone", "type": "string" } ], "name": "receiver", "type": "tuple" }, { "name": "category", "type": "string" }, { "name": "price", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" } ]');
 	
 	var contract = web3.eth.contract(abi).at(contractAddr);
 	
-	var senderName = contract.getSenderName.call({from: addr});
-	var senderAddr = contract.getSenderAddr.call({from: addr});
-	var senderPhone = contract.getSenderPhone.call({from: addr});
-	var receiverName = contract.getReceiverName.call({from: addr});
-	var receiverAddr = contract.getReceiverAddr.call({from: addr});
-	var receiverPhone = contract.getReceiverPhone.call({from: addr});
-	var category = contract.getCategory.call({from: addr});
-	var price = contract.getPrice.call({from: addr});
+	var senderName = contract.getSenderName.call({ from : addr });
+	var senderAddr = contract.getSenderAddr.call({ from : addr });
+	var senderPhone = contract.getSenderPhone.call({ from : addr });
+	var receiverName = contract.getReceiverName.call({ from : addr });
+	var receiverAddr = contract.getReceiverAddr.call({ from : addr });
+	var receiverPhone = contract.getReceiverPhone.call({ from : addr });
+	var category = contract.getCategory.call({ from : addr });
+	var price = contract.getPrice.call({ from : addr });
 	
 	$('#senderName').html('<strong><span style="font-size: 12.0pt;">' + senderName + '</span></strong>');
 	$('#senderAddr').html('<strong><span style="font-size: 12.0pt;">' + senderAddr + '</span></strong>');

@@ -42,18 +42,19 @@
 </table>
 
 <script type="text/javascript">
-//var from = $('#addr').val();
-	var from = '0x5f3e46d770493bb6368fdf42c944807615b04f19';
-	console.log(from);
+	//var addr = $('#addr').val();
+	var addr = '0xf9acc6ebb64f842b1af3696c453213096b576c8f';
+	console.log(addr);
+	
 	var web3 = new Web3("http://10.64.78.19:8545"); 
 	web3.setProvider(new web3.providers.HttpProvider("http://10.64.78.19:8545"));
 	
-	var contractAddr = "0x353d07c72d55f523b61bd4d4b40dfdb8eff81dea";
+	var contractAddr = "0x4ff006a1557de3690b321351cd484815e6cc994d";
 	var abi = JSON.parse('[ { "constant": false, "inputs": [ { "name": "name", "type": "string" }, { "name": "hanja", "type": "string" }, { "name": "identityNum", "type": "string" }, { "name": "addr", "type": "string" }, { "name": "issueDate", "type": "string" }, { "name": "issueGov", "type": "string" } ], "name": "setIdentity", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getIdentity", "outputs": [ { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" } ]');
 	
 	var contract = web3.eth.contract(abi).at(contractAddr);
 	
-	var identityCard = contract.getIdentity.call();
+	var identityCard = contract.getIdentity.call({ from : addr });
 	
 	var name = identityCard[0];
 	var hanja = identityCard[1];

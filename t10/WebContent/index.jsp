@@ -308,7 +308,103 @@
 	</c:when>
 	<c:when test="${ memberInfo.memberType == 'QUR' }">
 
-	<!-- Invoice Section -->
+	
+	</c:when>
+	<c:otherwise></c:otherwise>
+	</c:choose>
+
+
+<!-- Info Section -->
+	<section class="portfolio" id="changeInfo">
+	
+		<div class="container">
+		<h2 class="text-center text-uppercase text-secondary mb-0">회원정보 수정</h2>
+        <hr class="star-dark mb-5">
+          <div class="col-lg-8 mx-auto">
+            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+            <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+          
+            <form id="updateForm" name="updateForm"	action="<c:url value="/com/MemberUpdate"/>" method="post">
+              
+              <input type="hidden" value="" id="flag" name="flag"/>
+              
+              <div class="control-group">
+                
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                 
+                  <label>Email Address</label>
+                  <input class="form-control" id="inputEmailChange" name="inputEmailChange" type="email" placeholder="Email Address" required="required" 
+                  data-validation-required-message="Please enter your email address." readonly="readonly" value="${memberInfo.memberEmail}">
+                  <p class="help-block text-danger" ></p>
+                </div>
+              </div>
+              
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Password</label>
+                  <input class="form-control" id="inputPasswordChange" name="inputPasswordChange" type="password" placeholder="Password" required="required" 
+                  data-validation-required-message="Please enter your password." value="${memberInfo.memberPw}">
+                  <p class="help-block text-danger"  ></p>
+                </div>
+              </div>
+              
+              
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Name</label>
+                  <input class="form-control" id="inputNameChange" name="inputNameChange" type="text" placeholder="Name" required="required" 
+                  data-validation-required-message="Please enter your name." value="${memberInfo.memberName}">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              
+              
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Phone Number</label>
+                  <input class="form-control" id="inputNumberChange" name="inputNumberChange" type="tel" placeholder="Phone Number" required="required" 
+                  data-validation-required-message="Please enter your phone number." value="${memberInfo.memberPhone}">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              
+              
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Type</label>
+                 		<select class="form-group floating-label-form-group controls mb-0 pb-2" id="userTypeChange" name="userTypeChange"
+							required>
+							<option value="NONE" class="form-group floating-label-form-group controls mb-0 pb-2">
+							회원 타입 선택</option>
+							<option value="NUR" class="form-group floating-label-form-group controls mb-0 pb-2"
+							<c:if test="${ memberInfo.memberType=='NUR'}"> selected="selected" </c:if>>
+							개인회원</option>
+							<option value="QUR" class="form-group floating-label-form-group controls mb-0 pb-2"
+							<c:if test="${ memberInfo.memberType=='QUR'}"> selected="selected" </c:if>>
+							기업회원</option>
+						</select>
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <br>
+              <div id="success"></div>
+              <div class="form-group">
+                <button class="btn btn-primary" type="submit" id="btnUpdate" name="btnUpdate">
+						변경 후 저장</button>
+							
+				<button class="btn btn-danger" type="submit" id="btnDelete"	name="btnDelete">
+						회원 삭제</button>
+              </div>
+            </form>
+          </div>
+        </div>
+		</section>
+		
+	
+	</c:otherwise>
+	</c:choose>
+
+<!-- Invoice Section -->
 	<section class="bg-primary text-white mb-0" id="invoice">
 	
 	<div class="container">
@@ -324,7 +420,7 @@
 					<h4 class="mb-3">보내는 분</h4>
 
 					<form action="/t10/register/registerAccount"
-						class="needs-validation" novalidate>
+						class="needs-validation" method="post" novalidate>
 						<div class="row">
 							<div class="col-md-6 mb-3">
 								<label for="senderName">이름</label> <input type="text"
@@ -479,101 +575,7 @@
 
 
 	</section>
-	</c:when>
-	<c:otherwise></c:otherwise>
-	</c:choose>
-
-
-<!-- Info Section -->
-	<section class="portfolio" id="changeInfo">
 	
-		<div class="container">
-		<h2 class="text-center text-uppercase text-secondary mb-0">회원정보 수정</h2>
-        <hr class="star-dark mb-5">
-          <div class="col-lg-8 mx-auto">
-            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-            <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-          
-            <form id="updateForm" name="updateForm"	action="<c:url value="/com/MemberUpdate"/>" method="post">
-              
-              <input type="hidden" value="" id="flag" name="flag"/>
-              
-              <div class="control-group">
-                
-                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                 
-                  <label>Email Address</label>
-                  <input class="form-control" id="inputEmailChange" name="inputEmailChange" type="email" placeholder="Email Address" required="required" 
-                  data-validation-required-message="Please enter your email address." readonly="readonly" value="${memberInfo.memberEmail}">
-                  <p class="help-block text-danger" ></p>
-                </div>
-              </div>
-              
-              <div class="control-group">
-                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                  <label>Password</label>
-                  <input class="form-control" id="inputPasswordChange" name="inputPasswordChange" type="password" placeholder="Password" required="required" 
-                  data-validation-required-message="Please enter your password." value="${memberInfo.memberPw}">
-                  <p class="help-block text-danger"  ></p>
-                </div>
-              </div>
-              
-              
-              <div class="control-group">
-                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                  <label>Name</label>
-                  <input class="form-control" id="inputNameChange" name="inputNameChange" type="text" placeholder="Name" required="required" 
-                  data-validation-required-message="Please enter your name." value="${memberInfo.memberName}">
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
-              
-              
-              <div class="control-group">
-                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                  <label>Phone Number</label>
-                  <input class="form-control" id="inputNumberChange" name="inputNumberChange" type="tel" placeholder="Phone Number" required="required" 
-                  data-validation-required-message="Please enter your phone number." value="${memberInfo.memberPhone}">
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
-              
-              
-              <div class="control-group">
-                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                  <label>Type</label>
-                 		<select class="form-group floating-label-form-group controls mb-0 pb-2" id="userTypeChange" name="userTypeChange"
-							required>
-							<option value="NONE" class="form-group floating-label-form-group controls mb-0 pb-2">
-							회원 타입 선택</option>
-							<option value="NUR" class="form-group floating-label-form-group controls mb-0 pb-2"
-							<c:if test="${ memberInfo.memberType=='NUR'}"> selected="selected" </c:if>>
-							개인회원</option>
-							<option value="QUR" class="form-group floating-label-form-group controls mb-0 pb-2"
-							<c:if test="${ memberInfo.memberType=='QUR'}"> selected="selected" </c:if>>
-							기업회원</option>
-						</select>
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
-              <br>
-              <div id="success"></div>
-              <div class="form-group">
-                <button class="btn btn-primary" type="submit" id="btnUpdate" name="btnUpdate">
-						변경 후 저장</button>
-							
-				<button class="btn btn-danger" type="submit" id="btnDelete"	name="btnDelete">
-						회원 삭제</button>
-              </div>
-            </form>
-          </div>
-        </div>
-		</section>
-		
-	
-	</c:otherwise>
-	</c:choose>
-
 	<!-- Footer -->
 	<footer class="footer text-center">
 		<div class="container">
