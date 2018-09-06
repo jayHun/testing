@@ -64,17 +64,15 @@ public class registerAccount extends HttpServlet {
 
 		
 		try {
-			/* qrcode 제작 */
-			//QrcodeBiz biz = new QrcodeBiz();
-			
-			/* qrcode 저장 */
-			//biz.makeQrcode(infoType, member, newAddress);
-			
+	
+			Admin admin = Admin.build(new HttpService("http://10.64.78.19:8545"));
+			String addr = admin.personalNewAccount(newPassword).send().getResult();
 			
 			/* smart contract에 setInvoice() */
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/register/registerAccount.jsp");
 			request.setAttribute("newPassword", newPassword);
+			request.setAttribute("addr", addr);
 
 			request.setAttribute("senderName", senderName);
 			request.setAttribute("senderAddr", senderAddr);

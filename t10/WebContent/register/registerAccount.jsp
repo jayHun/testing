@@ -70,11 +70,14 @@ document.getElementById("myDiv").style.display = "none";
 
 <div style="display:none;" id="myDiv" class="animate-bottom">
   <h1>블록체인에 송장 정보를 기록했습니다!</h1>
-  <p>송장 해쉬주소: <span id="addr"></span></p>
+  <p>송장 해쉬주소: ${ addr }</p>
   <p>송장 인증키: ${ newPassword }</p>
   <a id="url" href="">인증TEST(QR이미지 나와야함)<img src=""/></a>
 </div>
-
+	
+	<input type="hidden" id="addr" value="${ addr }"/>
+    <input type="hidden" id="password" value="${ newPassword }"/>
+    
     <input type="hidden" id="senderName" value="${ senderName }"/>
     <input type="hidden" id="senderAddr" value="${ senderAddr }"/>
     <input type="hidden" id="senderPhone" value="${ senderPhone }"/>
@@ -83,7 +86,7 @@ document.getElementById("myDiv").style.display = "none";
     <input type="hidden" id="receiverPhone" value="${ receiverPhone }"/>
     <input type="hidden" id="category" value="${ type }"/>
     <input type="hidden" id="price" value="${ price }"/>
-    <input type="hidden" id="password" value="${ newPassword }"/>
+    
     
 
 <script type="text/javascript">
@@ -105,7 +108,8 @@ document.getElementById("myDiv").style.display = "none";
 
 	/* make invoice hash */
 	var password = $('#password').val(); // invoice auth password
-	var addr = web3.personal.newAccount(password);	
+	var addr = $('#addr').val();	
+	
 	$('#url').attr('href', "/t10/auth/authPage?addr=" + addr + "&infoType=DEL");
 	$('#addr').text(addr);
 	
@@ -121,7 +125,7 @@ document.getElementById("myDiv").style.display = "none";
 		console.log("invoice open: " + web3.personal.unlockAccount(addr, password)); // invoice open
 		
 		/* contract instance */
-		var contractAddr = "0x02b33668ff3e0f252e8f8e25eab91c7a6b640552";
+		var contractAddr = "0x88562fb185b7df631116801c46a3b6ff873c8e86";
 		var abi = JSON.parse('[ { "constant": false, "inputs": [ { "name": "category", "type": "string" }, { "name": "price", "type": "string" } ], "name": "setInvoice", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "recieverName", "type": "string" }, { "name": "recieverAddr", "type": "string" }, { "name": "recieverPhone", "type": "string" } ], "name": "setReceiver", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "senderName", "type": "string" }, { "name": "senderAddr", "type": "string" }, { "name": "senderPhone", "type": "string" } ], "name": "setSender", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getCategory", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getPrice", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReceiverAddr", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReceiverName", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReceiverPhone", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getSenderAddr", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getSenderName", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getSenderPhone", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "InvoiceList", "outputs": [ { "components": [ { "name": "name", "type": "string" }, { "name": "addr", "type": "string" }, { "name": "phone", "type": "string" } ], "name": "sender", "type": "tuple" }, { "components": [ { "name": "name", "type": "string" }, { "name": "addr", "type": "string" }, { "name": "phone", "type": "string" } ], "name": "receiver", "type": "tuple" }, { "name": "category", "type": "string" }, { "name": "price", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" } ]');
 		var contract = web3.eth.contract(abi).at(contractAddr);
 		

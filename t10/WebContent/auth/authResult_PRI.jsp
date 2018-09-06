@@ -243,8 +243,8 @@
 	var transferDate = householderInfo[2];
 	var tranferReason = householderInfo[3];
 	var householderRelation = householderInfo[4];
-	var houseAddr = contract.getHouseAddr.call();
-	var familyCount = parseInt(contract.getFamilyCount.call());
+	var houseAddr = contract.getHouseAddr.call({ from : addr });
+	var familyCount = parseInt(contract.getFamilyCount.call({ from : addr }));
 	
 	$('#householderName').html('<span style="font-size: 12.0pt;">' + householderName + '</span>');
 	$('#tranferReason').html('<span style="font-size: 12.0pt;">' + tranferReason + '</span>');

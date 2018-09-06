@@ -49,7 +49,7 @@
 	var web3 = new Web3("http://10.64.78.19:8545"); 
 	web3.setProvider(new web3.providers.HttpProvider("http://10.64.78.19:8545"));
 	
-	var contractAddr = "0x4ff006a1557de3690b321351cd484815e6cc994d";
+	var contractAddr = "0xe39b620c402182e6f34d60e714fcfd89bb2e51be";
 	var abi = JSON.parse('[ { "constant": false, "inputs": [ { "name": "name", "type": "string" }, { "name": "hanja", "type": "string" }, { "name": "identityNum", "type": "string" }, { "name": "addr", "type": "string" }, { "name": "issueDate", "type": "string" }, { "name": "issueGov", "type": "string" } ], "name": "setIdentity", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getIdentity", "outputs": [ { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" }, { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" } ]');
 	
 	var contract = web3.eth.contract(abi).at(contractAddr);
